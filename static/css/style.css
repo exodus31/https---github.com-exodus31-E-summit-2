@@ -369,11 +369,6 @@ h6 {
 .navbar-mobile .dropdown ul li {
   min-width: 200px;
 }
-
-.img-fluid{
-  border-radius: 10px;
-}
-
 .navbar-mobile .dropdown ul a {
   padding: 10px 20px;
 }
