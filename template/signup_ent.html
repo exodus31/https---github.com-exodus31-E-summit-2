@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>BizPage Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">  
+  <link href="{% static '/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">  
+  <link href="{% static '/css/style.css'%}" rel="stylesheet">
+</head>
+
+<body>  
+  <header id="header" class="fixed-top d-flex align-items-center header">
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="index.html">BizPage</a></h1>
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link " href="/">Home</a></li>              
+              <li><a class="nav-link " href="/browse">Browse</a></li>
+              <li><a class="nav-link " href="login">Login</a></li>                                         
+              <li><a class="nav-link " href="signup_inv">SignUp as Investor</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>  
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active" style="background: url('/static/img/hero-carousel/1.jpg')">
+            <div class="carousel-container">
+              <div class="container">
+                <h1 align="center" style="color:white; padding-bottom: 50px; font-weight: 800;" >SignUp As Entreprenuer</h1>
+                <div class="form-center" style="width: 400px; margin:0 auto">
+                    <form method="post">                    
+                        <div class="form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                        </div>                    
+                        <br/>
+                        <div class="form-group">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Password" required>
+                        </div>                                       
+                        <br/>
+                        <div class="text-center"><button type="submit" class="btn-get-started" style="font-size: 25px; border: none;">SignUp</button></div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>      
+        </div>    
+      </div>
+    </div>
+  </section>
+</body>
+</html>          
+
+         
