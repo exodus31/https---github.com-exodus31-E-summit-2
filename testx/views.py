@@ -40,7 +40,7 @@ def signup_ent(request):
                         break
         ent_obj = Enterp.objects.create(id =i, username = username, email = email, name = name)
         ent_obj.save()
-        return redirect('/')
+        return redirect('/login')
     return render(request, 'signup_ent.html')
 
 def signup_inv(request):
@@ -69,7 +69,7 @@ def signup_inv(request):
                         break
         inv_obj = Investor.objects.create(id =i, username = username, email = email, name = name)
         inv_obj.save()
-        return redirect('/')
+        return redirect('/login')
     return render(request, 'signup_inv.html')
 
 def login(request):
