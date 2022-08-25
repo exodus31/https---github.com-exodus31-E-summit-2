@@ -48,7 +48,8 @@
               <div class="container">
                 <h1 align="center" style="color:white; padding-bottom: 50px; font-weight: 800;" >SignUp As Investor</h1>
                 <div class="form-center" style="width: 400px; margin:0 auto">
-                    <form method="post">                    
+                    <form method="post">   
+                        {% csrf_token %}                 
                         <div class="form-group">
                             <input type="text" name="name" class="form-control" placeholder="Name" required>
                         </div>
