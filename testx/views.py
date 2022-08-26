@@ -17,7 +17,33 @@ def browse(request):
     II = Investor.objects.all()
     EE = Enterp.objects.all()    
     if request.method == 'POST':
-        searchx = request.POST.get('')
+        searchx = request.POST.get('searchx')
+        filterq = request.POST.get('filterq')
+        passarr1=[]
+        passarr2=[]
+        for s in Investor:                        
+            sname = s.name.lower()+s.firmname.lower()
+            result = sname.find(searchx)
+            
+            if(result != -1):
+                if filterq == 'all':
+                    passarr1.append(s)    
+                elif s.invfield == filterq:
+                    passarr1.append(s)
+
+
+        for s in Enterp:                        
+            sname = s.companyname.lower()+s.name.lower()
+            result = sname.find(searchx)
+            if(result != -1):
+                if filterq == 'all':
+                    passarr2.append(s)    
+                elif s.field == filterq:
+                    passarr2.append(s)  
+
+            xx = Enterp.objects.all()  
+        return render(request, 'browse.html', {'invs': passarr1, 'ents': passarr2})
+
     return render(request, 'browse.html', {'invs': II, 'ents': EE})
 
 def signup_ent(request):

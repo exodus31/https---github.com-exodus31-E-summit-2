@@ -55,7 +55,7 @@
           <input id="search" name="searchx" type="text" placeholder="What are you looking for?" />
         </div>
         <div class="input-field second-wrap" style="border-radius:20px">
-          <select name="filterq" type="text" style="width:100%; height:67px;padding-left: 5px;">
+          <select name="filterq" type="text" style="width:100%; height:99%; padding-left: 5px;">
             <option value="all">All</option>
             <option value="Healthcare">Healthcare</option>
             <option value="Technology">Technology</option>
@@ -64,7 +64,7 @@
         </select>   
         </div>
         <div class="input-field third-wrap">
-          <button class="btn-search" type="button">Search</button>
+          <button class="btn-search" type="submit">Search</button>
         </div>
       </div>
     </form>
@@ -76,8 +76,9 @@
     </div>
     <br/><br/>
     <hr/>    
-      <div id="showx">
-        <div class="col-4 portfolio-item filter-app ">
+     <div id="showx" class="row">
+        {% for m in ents %}
+        <div class="col-4 portfolio-item filter-app ">  
         <a href="#">
         <div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;">
         <figure>
@@ -85,20 +86,22 @@
         </figure>
         <hr/>
         <div class="portfolio-info">
-            <h4 align="center"><a href="portfolio-details.html">Enterpreneurs 1</a></h4>
+            <h4 align="center"><a href="portfolio-details.html">{{m.companyname}}</a></h4>
             <p align="center" style="line-height: 0%;">Enterpreneurs</p>
         </div>
         </div>
             </a>
-        </div>
-    </div>      
+        </div>     
+        {% endfor %}   
+     </div>    
             
   </div>
 </body>
 
 <script>
     function changetoent() {
-        document.getElementById('showx').innerHTML='<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{% static "/img/portfolio/app1.jpg" %}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">Enterpreneurs 1</a></h4><p align="center" style="line-height: 0%;">Enterpreneurs</p></div></div></a></div>'
+        // document.getElementById('showx').innerHTML='{% for m in ent2s %}<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{{m.image.url}}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">{{m.companyname}}</a></h4><p align="center" style="line-height: 0%;">ifejk</p></div></div></a></div>{% endfor %}'
+        document.getElementById('showx').innerHTML ='{% for m in ents %}<div class="col-4 portfolio-item filter-app "><a href="/yprofile/{{m.username}}"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{{m.image.url}}" class="img-fluid" alt=""></figure><hr/><div class="portfolio-info"><h4 align="center">{{m.companyname}}</h4><p align="center" style="line-height: 0%;">Enterpreneurs</p></div></div></a></div>{%endfor%}'
     }
     function changetoinv() {
         document.getElementById('showx').innerHTML='<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{% static "/img/portfolio/app1.jpg" %}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">Investors 1</a></h4><p align="center" style="line-height: 0%;">Investors</p></div></div></a></div>'
