@@ -13,8 +13,10 @@ def index(request):
 def signup(request):
     return render(request, 'signup1.html')
 
-def browse(request):
-    return render(request, 'browse.html')
+def browse(request):    
+    II = Investor.objects.all()
+    EE = Enterp.objects.all()    
+    return render(request, 'browse.html', {'invs': II, 'ents': EE})
 
 def signup_ent(request):
     if request.method == 'POST':

@@ -32,7 +32,7 @@
               <li><a class="nav-link" href="/">Home</a></li>
               <li><a class="nav-link " href="browse">Browse</a></li>
               {% if user.is_authenticated %}
-              <li><a class="nav-link " href="/yprofile">Your Profile</a></li>
+              <li><a class="nav-link " href="/yprofile/{{user.username}}">Your Profile</a></li>
               <li><a class="nav-link " href="/logout">Logout</a></li>
               {% else %}
               <li><a class="nav-link " href="/login">Login</a></li>
@@ -54,8 +54,14 @@
         <div class="input-field first-wrap">
           <input id="search" type="text" placeholder="What are you looking for?" />
         </div>
-        <div class="input-field second-wrap">
-          <input id="location" type="text" placeholder="location" />
+        <div class="input-field second-wrap" style="border-radius:20px">
+          <select id="location" type="text" style="width:100%; height:67px;padding-left: 5px;">
+            <option value="all">All</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Technology">Technology</option>
+            <option value="Finance">Finance</option>
+            <option value="Ecom">Ecom</option>
+        </select>   
         </div>
         <div class="input-field third-wrap">
           <button class="btn-search" type="button">Search</button>
@@ -63,125 +69,41 @@
       </div>
     </form>
   </div>
-  <div class="row " style="margin-top: 5%; padding-right: 0%;">
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
-        </div>
-      </div>
-      </a>
+  <div class="row " style="margin-top: 2%; padding-right: 0%;">
+    <div class="container justify-content-center align-items-center" >    
+        <button class="btn btn-primary" onclick="changetoinv()">Entreprenuers</button>
+        <button class="btn btn-primary" onclick="changetoent()">Investors</button>        
     </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;">
+    <br/><br/>
+    <hr/>    
+      <div id="showx">
+        <div class="col-4 portfolio-item filter-app ">
+        <a href="#">
+        <div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;">
         <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
+            <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
         </figure>
+        <hr/>
         <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
+            <h4 align="center"><a href="portfolio-details.html">Enterpreneurs 1</a></h4>
+            <p align="center" style="line-height: 0%;">Enterpreneurs</p>
         </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%;margin-left: 0%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
         </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
+            </a>
         </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
-        </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%;margin-left: 0%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
-        </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
-        </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
-        </div>
-      </div>
-      </a>
-    </div>
-    <div class="col-4 portfolio-item filter-app ">
-      <a href="#">
-      <div class="portfolio-wrap" style="max-width: 80%;margin-left: 0%;">
-        <figure>
-          <img src="{% static '/img/portfolio/app1.jpg' %}" class="img-fluid" alt="">
-        </figure>
-        <div class="portfolio-info">
-          <h4 align="center"><a href="portfolio-details.html">App 1</a></h4>
-          <p align="center" style="line-height: 0%;">App</p>
-        </div>
-      </div>
-      </a>
-    </div>
+    </div>      
+            
   </div>
 </body>
+
+<script>
+    function changetoent() {
+        document.getElementById('showx').innerHTML='<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{% static "/img/portfolio/app1.jpg" %}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">Enterpreneurs 1</a></h4><p align="center" style="line-height: 0%;">Enterpreneurs</p></div></div></a></div>'
+    }
+    function changetoinv() {
+        document.getElementById('showx').innerHTML='<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{% static "/img/portfolio/app1.jpg" %}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">Investors 1</a></h4><p align="center" style="line-height: 0%;">Investors</p></div></div></a></div>'
+    }
+</script>
+
 
 </html>
