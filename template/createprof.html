@@ -33,11 +33,11 @@
         </div>
         </div>
     </div>
-    </header>   
+</header>   
   <section id="hero">
     <div class="hero-container">
       <div id="heroCarousel" class="carousel slide carousel-fade">        
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner" >
           <div class="carousel-item active" style="background: url('/static/img/photo-1606857521015-7f9fcf423740.webp'); background-size: cover;">
             <div class="carousel-container">
             {% if user.is_staff %}
@@ -95,11 +95,11 @@
                       <div class="row">
                         <div class="form-group col-md-6" style="text-align:left; color: white;">
                         <label style="padding-bottom: 15px; padding-left: 5px;">Current Funds</label>
-                          <input type="text" class="form-control" name="name"  placeholder="Current Funds" required>
+                          <input type="text" class="form-control" name="cfunds"  placeholder="Current Funds" required>
                         </div>                        
                         <div class="form-group col-md-6" style="text-align:left; color: white;">
                         <label style="padding-bottom: 15px; padding-left: 5px;">Required Funding</label>
-                          <input type="text" class="form-control" name="email"  placeholder="Required Funding" required>
+                          <input type="text" class="form-control" name="rfunding"  placeholder="Required Funding" required>
                         </div>
                       </div>
                       <br/>
@@ -115,9 +115,14 @@
                     <br/>
                     <div class="form-group" style="text-align:left; color: white;">
                         <label style="padding-bottom: 15px; padding-left: 5px;">Quick Pitch</label>
-                        <textarea rows="2" class="form-control" name="subject"  placeholder="Quick Pitch" required></textarea>
+                        <input class="form-control" name="qpitch"  placeholder="Quick Pitch" required />
                       </div>                                                             
-                      <br/>                         
+                      <br/>   
+                      <div class="form-group" style="text-align:left; color: white;">
+                        <label style="padding-bottom: 15px; padding-left: 5px;">Buisness Plan</label>
+                        <input  class="form-control" name="bplan"  placeholder="Buisness Plan" required />
+                      </div>
+                      <br/>                      
                       <div class="text-center"><button type="submit" class="btn-get-started" style="border:none; font-size:20px; background-color:beige;color: rgb(57, 57, 57);">Create</button></div>
                     </form>
                   </div>

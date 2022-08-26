@@ -59,7 +59,7 @@
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
                 <div class="swiper-slide">
-                  <img src="{% static '/img/portfolio/portfolio-details-1.jpg' %}" alt="">
+                  <img src="{{obj.image.url}}" alt="">
                 </div>                                
               </div>   
               <div class="container mt-4">
@@ -104,45 +104,48 @@
               <div class="portfolio-details-slider swiper">
                 <div class="swiper-wrapper align-items-center">
                   <div class="swiper-slide">
-                    <img src="{% static '/img/portfolio/portfolio-details-1.jpg' %}" alt="">
+                    <img src="{{obj.image.url}}" alt="">
                   </div>                                
                 </div>   
                 <div class="container mt-4">
-                  <a onclick="editphoto()"><button class="btn btn-primary">Edit Profile Photo</button></a>
-                  <br/>
-                  <br/>
+                  <a onclick="editphoto()"><button class="btn btn-primary">Edit Image</button></a>
+                  <br/>                
                   <div id="photo"></div>
+                  <div class="portfolio-description ">
+                      <h2>About Investor</h2>
+                      <p>
+                        {{obj.bplan}}
+                      </p>
+                    </div>
                 </div>           
               </div>
             </div>
   
             <div class="col-lg-4">
               <div class="portfolio-info">
-                <h3>Project information</h3>
+                <h3>General information</h3>
                 <ul>
-                  <li><strong>Category</strong>: Web design</li>
-                  <li><strong>Client</strong>: ASU Company</li>
-                  <li><strong>Project date</strong>: 01 March, 2020</li>
-                  <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                  <li><strong>Company Name</strong>: {{obj.companyname}}</li>
+                  <li><strong>Pre-Money Valuation</strong>: {{obj.cfunds}}</li>
+                  <li><strong>Required Funding</strong>: {{obj.rfunding}}</li>                
+                  <li><strong>Field</strong>: {{obj.field}}</li>
                 </ul>
               </div>
-              <div class="portfolio-description">
-                <h2>This is an example of portfolio detail</h2>
+              <div class="portfolio-description container">
+                <h2>About Startup</h2>
                 <p>
-                  {{obj.details}}
+                  {{obj.qpitch}}
                 </p>
               </div>
             </div>
-  
           </div>
-  
         </div>
       </section>
     {% endif%}
   </main>
   <script>
     function editphoto(){
-      document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Profile Photo</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{student.username}}"><br/><input type="submit" class="btn btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;" href="/yprofile" value="Edit"/></form> '
+      document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Profile Photo</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{student.username}}"><br/><input type="submit" class="btn btn-primary" href="/yprofile" value="Edit"/></form> '
     }
   </script>
   </body>
