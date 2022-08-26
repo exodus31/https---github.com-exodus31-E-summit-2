@@ -63,7 +63,7 @@
                 </div>                                
               </div>   
               <div class="container mt-4">
-                <a onclick="editphoto()"><button class="btn btn-primary">Edit Image</button></a>
+                <a onclick="editphoto()"><button class="btn btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;">Edit Profile Photo</button></a>
                 <br/>                
                 <div id="photo"></div>
                 <div class="portfolio-description ">
@@ -108,7 +108,7 @@
                   </div>                                
                 </div>   
                 <div class="container mt-4">
-                  <a onclick="editphoto()"><button class="btn btn-primary">Edit Image</button></a>
+                  <a onclick="editphoto()"><button class="btn btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;">Edit Image</button></a>
                   <br/>                
                   <div id="photo"></div>
                   <div class="portfolio-description ">
@@ -145,7 +145,7 @@
   </main>
   <script>
     function editphoto(){
-      document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Profile Photo</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{user.username}}"><br/><input type="submit" class="btn btn-primary" href="/yprofile/{{user.username}}" value="Edit"/></form> '
+      document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Profile Photo</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{user.username}}"><br/><input style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;" type="submit" class="btn btn-primary" href="/yprofile/{{user.username}}" value="Edit"/></form> '
     }
   </script>
   </body>

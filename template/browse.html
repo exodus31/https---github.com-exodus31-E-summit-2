@@ -32,7 +32,7 @@
               <li><a class="nav-link" href="/">Home</a></li>
               <li><a class="nav-link " href="browse">Browse</a></li>
               {% if user.is_authenticated %}
-              <li><a class="nav-link " href="/yprofile">Your Profile</a></li>
+              <li><a class="nav-link " href="/yprofile/{{user.username}}">Your Profile</a></li>
               <li><a class="nav-link " href="/logout">Logout</a></li>
               {% else %}
               <li><a class="nav-link " href="/login">Login</a></li>
