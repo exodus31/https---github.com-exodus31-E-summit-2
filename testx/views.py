@@ -177,3 +177,6 @@ def yprofile(request, pk):
         obj=Enterp.objects.filter(username = pk).first()
         return render(request, 'yourprofile.html', {'obj': obj})
     return render(request, 'yourprofile.html', {'obj': obj})
+
+def forums(request):
+    return render(request, 'forums.html')
