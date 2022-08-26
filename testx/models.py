@@ -10,7 +10,7 @@ class Enterp(models.Model):
     username = models.CharField(max_length=100)
     companyname = models.CharField(max_length=100, default="")
     email = models.CharField(max_length=100)
-    onldesc = models.CharField(max_length=1000, default="Not Shared Yet")
+    bplan = models.CharField(max_length=1000, default="Not Shared Yet")
     qpitch = models.CharField(max_length=1000, default="Not Shared Yet")
     cfunds = models.CharField(max_length=1000, default="Not Shared Yet")
     rfunding = models.CharField(max_length=1000, default="Not Shared Yet")
