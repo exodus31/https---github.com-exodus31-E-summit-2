@@ -16,6 +16,8 @@ def signup(request):
 def browse(request):    
     II = Investor.objects.all()
     EE = Enterp.objects.all()    
+    if request.method == 'POST':
+        searchx = request.POST.get('')
     return render(request, 'browse.html', {'invs': II, 'ents': EE})
 
 def signup_ent(request):
