@@ -38,7 +38,7 @@ def signup_ent(request):
                         i=i+1
                 else:
                         break
-        ent_obj = Enterp.objects.create(id =i, username = username, email = email, name = name)
+        ent_obj = Enterp.objects.create(id =i,user = user_obj, username = username, email = email, name = name)
         ent_obj.save()
         return redirect('/login')
     return render(request, 'signup_ent.html')
@@ -67,7 +67,7 @@ def signup_inv(request):
                         i=i+1
                 else:
                         break
-        inv_obj = Investor.objects.create(id =i, username = username, email = email, name = name)
+        inv_obj = Investor.objects.create(id =i, user = user_obj, username = username, email = email, name = name)
         inv_obj.save()
         return redirect('/login')
     return render(request, 'signup_inv.html')
@@ -111,8 +111,12 @@ def createprof(request, pk):
             obj2.field = request.POST.get('field')            
             obj2.save()
             return redirect('/')
-        else:
-            obj.details = request.POST.get("details")            
+        else:            
+            obj.firmname = request.POST.get("firmname")        
+            obj.networth = request.POST.get("networth")
+            obj.comphold = request.POST.get("comphold")
+            obj.invfield = request.POST.get("field")
+            obj.details = request.POST.get("details")  
             obj.save()
             return redirect('/')
     return render(request, 'createprof.html')
@@ -121,3 +125,10 @@ def logoutuser(request):
     logout(request)
     messages.info(request, "Logged Out")
     return redirect('/')
+
+def yprofile(request, pk):
+    obj = Investor.objects.filter(username = pk).first()
+    if obj is None:
+        obj=Enterp.objects.filter(username = pk).first()
+        return render(request, 'yourprofile.html', {'obj': obj})
+    return render(request, 'yourprofile.html', {'obj': obj})

@@ -27,10 +27,11 @@
           <h1 class="logo"><a href="/" >TresComas</a></h1>
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link " href="">Home</a></li>
+              <li><a class="nav-link " href="#">Home</a></li>
               <li><a class="nav-link " href="#aboutz">About</a></li>
               <li><a class="nav-link " href="/browse">Browse</a></li>
               {% if user.is_authenticated %}
+              <li><a class="nav-link " href="yprofile/{{user.username}}">Your Profile</a></li>
               <li><a class="nav-link " href="logout">Logout</a></li>
               {% else %}
               <li><a class="nav-link " href="login">Login</a></li>
@@ -60,7 +61,7 @@
             </div>
           </div>      
         </div>    
-      </div>
+      </div>      
     </div>
   </section>
 

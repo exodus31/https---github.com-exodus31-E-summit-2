@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>BizPage Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">  
+  <link href="{% static '/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">  
+  <link href="{% static '/css/style.css'%}" rel="stylesheet">
+</head>
+
+<body>   
+  <header id="header" class="fixed-top d-flex align-items-center header">
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <h1 class="logo"><a href="/" >TresComas</a></h1>
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li><a class="nav-link " href="/">Home</a></li>
+              <li><a class="nav-link " href="/browse">Browse</a></li>              
+              <li><a class="nav-link " href="/logout">Logout</a></li>              
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>    
+  <!-- <br/><br/><br/><br/>
+    <div class="container">
+        <img src="{% static '/img/about-bg.jpg'%}" alt="..." style="width:80%; display: block; margin-left: auto; margin-right: auto;">
+    </div>
+  </div>   -->
+  <main id="main">    
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2> Welcome {{obj.name}}</h2>         
+        </div>
+      </div>
+    </section>
+    {% if user.is_staff %}
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide">
+                  <img src="{% static '/img/portfolio/portfolio-details-1.jpg' %}" alt="">
+                </div>                                
+              </div>   
+              <div class="container mt-4">
+                <a onclick="editphoto()"><button class="btn btn-primary">Edit Profile Photo</button></a>
+                <br/>                
+                <div id="photo"></div>
+                <div class="portfolio-description ">
+                    <h2>About Investor</h2>
+                    <p>
+                      {{obj.details}}
+                    </p>
+                  </div>
+              </div>           
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>General information</h3>
+              <ul>
+                <li><strong>Firm Name</strong>: {{obj.firmname}}</li>
+                <li><strong>Networth</strong>: {{obj.networth}}</li>
+                <li><strong>Equity Holdings</strong>: {{obj.comphold}}</li>                
+                <li><strong>Field of Interest</strong>: {{obj.invfield}}</li>
+              </ul>
+            </div>
+            <div class="portfolio-description container">
+              <h2>About Investor</h2>
+              <p>
+                {{obj.details}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% else %}
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-8">
+              <div class="portfolio-details-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+                  <div class="swiper-slide">
+                    <img src="{% static '/img/portfolio/portfolio-details-1.jpg' %}" alt="">
+                  </div>                                
+                </div>   
+                <div class="container mt-4">
+                  <a onclick="editphoto()"><button class="btn btn-primary">Edit Profile Photo</button></a>
+                  <br/>
+                  <br/>
+                  <div id="photo"></div>
+                </div>           
+              </div>
+            </div>
+  
+            <div class="col-lg-4">
+              <div class="portfolio-info">
+                <h3>Project information</h3>
+                <ul>
+                  <li><strong>Category</strong>: Web design</li>
+                  <li><strong>Client</strong>: ASU Company</li>
+                  <li><strong>Project date</strong>: 01 March, 2020</li>
+                  <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                </ul>
+              </div>
+              <div class="portfolio-description">
+                <h2>This is an example of portfolio detail</h2>
+                <p>
+                  {{obj.details}}
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section>
+    {% endif%}
+  </main>
+  <script>
+    function editphoto(){
+      document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Profile Photo</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{student.username}}"><br/><input type="submit" class="btn btn-primary" href="/yprofile" value="Edit"/></form> '
+    }
+  </script>
+  </body>
+  </html>

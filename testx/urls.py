@@ -11,4 +11,6 @@ urlpatterns = [
     path('signup_inv', views.signup_inv, name="signup_inv"),
     path('createprof/<str:pk>', views.createprof, name="createprof"),
     path('login', views.login, name="login"), 
+    path('yprofile/<str:pk>', views.yprofile, name="yprofile"),
+    path('createprof/logout', views.logout, name="createproflogout"),
 ]
