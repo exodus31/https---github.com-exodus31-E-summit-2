@@ -15,6 +15,7 @@ class Enterp(models.Model):
     cfunds = models.CharField(max_length=1000, default="Not Shared Yet")
     rfunding = models.CharField(max_length=1000, default="Not Shared Yet")
     field = models.CharField(max_length=1000, default="General")
+    image = models.ImageField(default='1920-1.jpg')
 
     def __str__(self):
         return self.name
@@ -29,6 +30,7 @@ class Investor(models.Model):
     comphold = models.CharField(max_length=1000, default="Not Shared Yet")
     invfield = models.CharField(max_length=1000, default="General")   
     firmname = models.CharField(max_length=200, default="")
+    image = models.ImageField(default='1920-1.jpg')
     
     def __str__(self):
         return self.name

@@ -1,3 +1,4 @@
+from tkinter.tix import StdButtonBox
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, User
 from django.contrib import messages
@@ -127,6 +128,20 @@ def logoutuser(request):
     return redirect('/')
 
 def yprofile(request, pk):
+    if request.method == 'POST':
+        img = request.FILES.get('image')
+        username = request.POST.get('username')
+        obj = Investor.objects.filter(username = username).first()
+        if obj is None:
+            obj=Enterp.objects.filter(username = username).first()
+            obj.image = img
+            obj.save()
+            return redirect('/yprofile/'+username)
+        else:
+            obj.image = img
+            obj.save()
+            return redirect('/yprofile/'+username)
+
     obj = Investor.objects.filter(username = pk).first()
     if obj is None:
         obj=Enterp.objects.filter(username = pk).first()
