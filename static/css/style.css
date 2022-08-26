@@ -151,7 +151,7 @@ h6 {
   font-weight: 700;
   letter-spacing: 3px;
   padding-left: 10px;
-  border-left: 4px solid #18d26e;
+
 }
 
 #header .logo a {
@@ -2196,4 +2196,18 @@ section {
   text-align: center;
   font-size: 13px;
   color: #ddd;
+}
+.btn{
+  color: white; 
+  background:#18d26e; 
+  border: #18d26e; 
+  transition: 0.5s;
+}
+.btn:hover{
+  color: #18d26e;
+  background: white;
+}
+.btn:active{
+  color: #18d26e;
+  background: white;
 }
