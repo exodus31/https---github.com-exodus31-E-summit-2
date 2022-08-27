@@ -72,7 +72,8 @@
       </div>
     </form>
   </div>
-  <div class="row justify-content-center" style="margin-top:5% ;">
+  <div class="row justify-content-center" >
+    <section id="facts" style="background-image: url(/static/img/austin-distel-DS1hZ4xzD7M-unsplash.jpg); background-size:cover; ">
     <div class="container " >
       <div class="row" style="margin-bottom: 2%;">
       <div class="col-4"> </div>
@@ -82,20 +83,22 @@
       </div>  
       </div>    
     </div>
-    <br/><br/>
-    <hr/>    
+    </section>
+  
+    <section id="facts" style="background-image: url(/static/img/austin-distel-DS1hZ4xzD7M-unsplash.jpg); background-size:cover; ">
+    <div class="container">
      <div id="showx" class="row pb-5">
         {% for m in ents %}
         <div class="col-4 ">  
         <a href="/yprofile/{{m.username}}">
-        <div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;">
+        <div class="portfolio-wrap" style="box-shadow: 2px 2px 2px 3px rgb(104, 103, 103);">
         <figure>
-            <img src="{{m.image.url}}" class="img-fluid" alt="" style="border-radius: 8px;"/>
+            <img src="{{m.image.url}}" class="img-fluid" alt="" style="border-radius: 8px; height: 200px; object-fit: cover; margin-top: 3%; "/>
         </figure>
         <hr/>
         <div class="portfolio-info">
-            <h4 align="center">{{m.companyname}}</h4>
-            <p align="center" style="line-height: 0%; color:black">{{m.field}}</p>
+            <h4 align="center" style="line-height: 0%; font-weight: 800; color: #147b44;">{{m.companyname}}</h4>
+            <p align="center" style="line-height: -7%; color:black; padding-bottom: 3%;">{{m.field}}</p>
         </div>
         </div>
             </a>
@@ -103,7 +106,9 @@
         {% empty %}
            <h1 align="center">No Results.</h1>
         {% endfor %}    
-     </div>    
+     </div>   
+    </div>
+    </section> 
 
   </div>
 </body>
