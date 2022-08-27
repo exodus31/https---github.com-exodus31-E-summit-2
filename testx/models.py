@@ -19,6 +19,7 @@ class Enterp(models.Model):
     cfunds = models.CharField(max_length=1000, default="Not Shared Yet")
     rfunding = models.CharField(max_length=1000, default="Not Shared Yet")
     field = models.CharField(max_length=1000, default="General")
+    is_investor = models.BooleanField(default=False)   
     image = models.ImageField(default='1920-1.jpg')
 
     def __str__(self):
@@ -49,3 +50,11 @@ class Forum(models.Model):
 
     def __str__(self):
         return self.posteruname
+
+class Comments(models.Model):
+    senderuname = models.CharField(max_length=50,default='')
+    recieveruname = models.CharField(max_length=50,default='')
+    content = models.CharField(max_length=2000,default='')    
+
+    def __str__(self):
+        return self.recieveruname

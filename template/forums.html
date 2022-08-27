@@ -36,7 +36,21 @@
     transition: 0.3s;
     border: solid 1px #18d26e;
   }
- 
+  .btncreate2{
+    background-color: #18d26e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px; 
+    padding: 1%;       
+    border: solid 1px #18d26e;
+  }
+  .btncreate2:hover{
+    background-color: white;
+    color: #18d26e;
+    transition: 0.3s;
+    border: solid 1px #18d26e;
+  }   
 </style>
 <body>   
   <header id="header" class="fixed-top d-flex align-items-center header">
@@ -91,18 +105,40 @@
                 </div>
                 {% endif %}
                 <div class="read-more">
-                  <a href="#">Comment</a>
-                </div>
+                  {% if user.username == f.posteruname %}
+                    <button onclick="commentbtn()" class="btncreate2">View Comments</button>
+                  {% else %}  
+                    <button onclick="commentbtn2()" class="btncreate2">Comment</button>
+                  {% endif %}
+                </div>                
+                  <div class="container" id="comm">
+                    <form method="post" action="createcomment">
+                      {% csrf_token %}
+                      <br/>
+                      <div class="form-group" >
+                        <input type="text" name="title" class="form-control" placeholder="Comment" required>
+                      </div>
+                      <br/>
+                      <div class="form-group" >
+                        <input type="hidden" name="senderuname" class="form-control" value="{{user.username}">
+                      </div>
+                      <div class="form-group" >
+                        <input type="hidden" name="recieveruname" class="form-control" value="{{f.posteruname}">
+                      </div>
+                      <div class="">
+                          <button type="submit"class="btncreate2" style="font-size: 20px;">Create</button>
+                        </div>
+                    </form>
+                </div>                
               </div>
             </article> 
             {%endfor%}                    
           </div>
           <div class="col-lg-4">
-            <div class="sidebar">
+            <div class="sidebar">              
               <button class="btncreate" onclick="cpost()" style="font-family: Inter;">Create A Post</button>
             </div>
-            <div id="cpost">              
-            </div>
+            <div id="cpost"></div>
           </div>
         </div>
       </div>
@@ -119,6 +155,17 @@
       else{
         x=0
         document.getElementById('cpost').innerHTML=''
+      }
+    }
+
+    function commentbtn(){
+      if(x==0){
+        document.getElementById('comm').innerHTML='<br><div class="card" style="padding-left: 2%"><p style="padding-top: 2%;">Name</p><h4>Content</h4></div><br><div class="card" style="padding-left: 2%"><p style="padding-top: 2%;">Name</p><h4>Content</h4></div><br><div class="card" style="padding-left: 2%"><p style="padding-top: 2%;">Name</p><h4>Content</h4></div><br>'
+        x=1
+      }
+      else{
+        x=0
+        document.getElementById('comm').innerHTML=''
       }
     }
   </script>

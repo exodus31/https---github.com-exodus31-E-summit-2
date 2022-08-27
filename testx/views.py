@@ -208,3 +208,5 @@ def deletepost(request, pk):
     Forum.objects.filter(id=pk).delete()
     return redirect('/forums')
     
+
+
