@@ -55,7 +55,7 @@ class Comments(models.Model):
     senderuname = models.CharField(max_length=50,default='')
     recieveruname = models.CharField(max_length=50,default='')
     comment = models.CharField(max_length=2000,default='')    
-    postid = models.IntegerField(max_length=100, default='')
+    postid = models.IntegerField( default='')
 
     def __str__(self):
         return self.recieveruname + str(self.postid)

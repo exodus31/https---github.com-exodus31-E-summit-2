@@ -45,7 +45,10 @@
           <div class="carousel-item active" style="background: url('/static/img/photo-1606857521015-7f9fcf423740.webp'); background-size: cover;">
             <div class="carousel-container">
               <div class="container">
-                <h1 align="center" style="color:white; padding-bottom: 50px; font-weight: 800;" >LOGIN</h1>
+                <h1 align="center" style="color:white; padding-bottom: 25px; font-weight: 800;" >LOGIN</h1>
+                {% for m in messages%}
+                <h4 style="color: white;">{{m}}</h4>
+                {% endfor %}
                 <div class="form-center" style="width: 400px; margin:0 auto">
                     <form method="post">     
                         {% csrf_token %}

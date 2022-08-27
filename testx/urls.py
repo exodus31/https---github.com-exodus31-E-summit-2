@@ -15,5 +15,6 @@ urlpatterns = [
     path('createprof/logout', views.logout, name="createproflogout"),
     path('forums', views.forums, name='forum'),  
     path('deletepost/<str:pk>', views.deletepost, name="dpost"),
-    path('createcomment', views.ccomment, name="ccomment")
+    path('createcomment', views.ccomment, name="ccomment"),
+    path('deletecom/<str:pk>', views.deletecom, name="dcom"),
 ]

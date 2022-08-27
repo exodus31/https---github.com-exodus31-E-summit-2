@@ -51,13 +51,28 @@
     transition: 0.3s;
     border: solid 1px #18d26e;
   }   
+  .btn-danger:hover{
+    border: solid 1px red;
+    background-color: white;
+    color: red;
+    transition: 0.3s;
+  }
+  .btn-danger{
+    width: 20%; 
+    font-size: 16px;
+    background-color: red; 
+    color: white; 
+    border: solid 1px red; 
+    border-radius: 8px; 
+    padding: 1%;
+  }
 </style>
 <body>   
   <header id="header" class="fixed-top d-flex align-items-center header">
     <div class="container-fluid">
       <div class="row justify-content-center align-items-center">
         <div class="col-xl-11 d-flex align-items-center justify-content-between">
-          <h1 class="logo"><a href="/" >TresComas</a></h1>
+          <h1 class="logo"><a href="/"> <img src="/static/img/,,,.png"> TresComas</a></h1>
           <nav id="navbar" class="navbar">
             <ul>
               <li><a class="nav-link " href="/">Home</a></li>
@@ -148,6 +163,8 @@
                       <div class="card" style="padding-left: 2%">
                         <p style="padding-top: 2%;">Your Comment</p>
                         <h4>{{c.comment}}</h4>
+                        <a href="/deletecom/{{c.id}}"><button class=" btn-danger" >Delete Comment</button></a>
+                        <br>
                       </div> 
                       {% endif %}
                     {% endif %}
