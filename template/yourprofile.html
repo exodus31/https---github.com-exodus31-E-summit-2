@@ -80,6 +80,54 @@
                       {{obj.details}}
                     </p>
                   </div>
+                  {% if user.username == obj.username %}
+                      <h2 align="center">Your Posts</h2>
+                    {% else %}
+                      <h2 align="center">Posts in Forums</h2>
+                    {% endif %}
+                    <section id="blog" class="blog">
+                    {% for f in forums %}
+                    {% if f.posteruname == obj.username %}
+                    <article class="entry">
+                      <div class="entry-img">
+                        <img src="{{f.image.url}}" alt="" class="img-fluid">
+                      </div>
+                      <h2 class="entry-title pt-4">
+                        {{f.title}}
+                      </h2>              
+                      <div class="entry-content">
+                        <p>
+                          {{f.details}}
+                        </p>                 
+                        {% if user.username == obj.username %}       
+                        <div class="container">
+                          <a href="/deletepost/{{f.id}}"><button class="btnx" style="background-color:red; border: none; padding: 1.5%;border-radius: 8px; color: white;">Delete Post</button></a>
+                        </div>                        
+                        {% endif %}
+                        <div class="container" id="comm">                          
+                          {% if user.username == obj.username %}
+                          {% for c in comments %}
+                            {% if c.recieveruname == f.posteruname and c.postid == f.id%}
+                            <br>
+                            <div class="card" style="padding-left: 2%">
+                              <p style="padding-top: 2%;">Commented By: {{c.senderuname}}</p>
+                              <h4>{{c.comment}}</h4>
+                            </div>
+                            {% endif %}                            
+                          {% endfor %}
+                          {% endif %}
+                        </div>                
+                      </div>
+                    </article>                    
+                    <br>
+                    {% endif %}
+                    {% empty %}
+                    {% if user.is_authenticated %}
+                      <h4 align="center">Post Something from Forums Page.</h4>
+                    {% else %}
+                      <h4 align="center">None.</h4>
+                    {% endif %}
+                    {% endfor %}
               </div>           
             </div>
           </div>
@@ -94,13 +142,7 @@
                 <li><strong>Field of Interest</strong>: {{obj.invfield}}</li>
                 <li><strong>Contact</strong>: {{obj.email}}</li>
               </ul>
-            </div>
-            <div class="portfolio-description container">
-              <h2>About Investor</h2>
-              <p>
-                {{obj.details}}
-              </p>
-            </div>
+            </div>            
           </div>
         </div>
       </div>
