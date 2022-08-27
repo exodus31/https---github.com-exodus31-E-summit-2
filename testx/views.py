@@ -169,11 +169,13 @@ def createprof(request, pk):
     return render(request, 'createprof.html')
 
 def logoutuser(request):
-    logout(request)
-    messages.info(request, "Logged Out")
+    logout(request)    
     return redirect('/')
 
 def yprofile(request, pk):
+
+    forums = Forum.objects.filter(posteruname = pk)
+    cc = Comments.objects.all()
     if request.method == 'POST':
         img = request.FILES.get('image')
         username = request.POST.get('username')
@@ -191,8 +193,8 @@ def yprofile(request, pk):
     obj = Investor.objects.filter(username = pk).first()
     if obj is None:
         obj=Enterp.objects.filter(username = pk).first()
-        return render(request, 'yourprofile.html', {'obj': obj})
-    return render(request, 'yourprofile.html', {'obj': obj})
+        return render(request, 'yourprofile.html', {'obj': obj, 'forums': forums, 'comments': cc})
+    return render(request, 'yourprofile.html', {'obj': obj, 'forums': forums, 'comments': cc})
 
 def forums(request):
     ff = Forum.objects.all()
@@ -208,6 +210,10 @@ def forums(request):
 
 def deletepost(request, pk):
     Forum.objects.filter(id=pk).delete()
+    return redirect('/forums')
+
+def deletecom(request, pk):
+    Comments.objects.filter(id=pk).delete()
     return redirect('/forums')
     
 def ccomment(request):    
