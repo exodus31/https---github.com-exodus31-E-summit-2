@@ -107,17 +107,19 @@
                 <div class="container" id="comm">
                   {% if user.username == f.posteruname %}
                   {% for c in comments %}
+                  {% if c.postid == f.id %}
                     {% if c.recieveruname == f.posteruname %}
                     <br>
                     <div class="card" style="padding-left: 2%">
                       <p style="padding-top: 2%;">Commented By: {{c.senderuname}}</p>
                       <h4>{{c.comment}}</h4>
                     </div>  
-                    {% endif%}          
+                    {% endif %}        
+                    {% endif %}            
                   {% endfor %}        
                     <br>
                   {% else %}
-                  {% if user.is_authenticated %}
+                  {% if user.is_authenticated %}                  
                   <h4 style="padding-left: 1%;">Add a comment</h4>
                   <form method="post" action="createcomment">
                     {% csrf_token %}                    
@@ -128,12 +130,28 @@
                     <div class="form-group" >
                       <input type="hidden" name="senderuname" class="form-control" value="{{user.username}}">
                     </div>
-                    <div class="form-group" ><input type="hidden" name="recieveruname" class="form-control" value="{{f.posteruname}}">
+                    <div class="form-group" >
+                      <input type="hidden" name="recieveruname" class="form-control" value="{{f.posteruname}}">
+                    </div>
+                    <div class="form-group" >
+                      <input type="hidden" name="postid" class="form-control" value="{{f.id}}">
                     </div>
                     <div class="">
                       <button type="submit"class="btncreate2" style="font-size: 20px;">Comment</button>
                     </div>
-                  </form>
+                  </form>                  
+                  <br>
+                  {% for c in comments %}                  
+                  {% if f.id == c.postid %}
+                    {% if user.username == c.senderuname %}                  
+                    <br>
+                      <div class="card" style="padding-left: 2%">
+                        <p style="padding-top: 2%;">Your Comment</p>
+                        <h4>{{c.comment}}</h4>
+                      </div> 
+                      {% endif %}
+                    {% endif %}
+                    {% endfor %}
                   {% endif %}
                   {% endif %}
                   
@@ -142,12 +160,14 @@
             </article> 
             {%endfor%}                    
           </div>
+          {% if user.is_authenticated%}
           <div class="col-lg-4">
             <div class="sidebar">              
               <button class="btncreate" onclick="cpost()" style="font-family: Inter;">Create A Post</button>
             </div>
             <div id="cpost"></div>
           </div>
+          {% endif %}
         </div>
       </div>
     </section>

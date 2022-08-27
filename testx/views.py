@@ -1,3 +1,4 @@
+import re
 from timeit import default_timer
 from turtle import pos
 from django.shortcuts import render, redirect
@@ -213,13 +214,14 @@ def ccomment(request):
     comment = request.POST.get('comment')
     reuname = request.POST.get('recieveruname')
     senduname = request.POST.get('senderuname')
+    postid = request.POST.get('postid')
     i=1
     while True:
             if(Comments.objects.filter(id=i)):
                     i=i+1
             else:
                     break
-    new_obj = Comments.objects.create(id = i,  recieveruname = reuname, senderuname = senduname, comment = comment)
+    new_obj = Comments.objects.create(id = i,  recieveruname = reuname, senderuname = senduname, comment = comment, postid = postid)
     new_obj.save()
     return redirect('/forums')
 

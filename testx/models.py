@@ -49,12 +49,13 @@ class Forum(models.Model):
     image = models.ImageField(default='1920-1.jpg')
 
     def __str__(self):
-        return self.posteruname
+        return self.posteruname + str(self.id)
 
 class Comments(models.Model):
     senderuname = models.CharField(max_length=50,default='')
     recieveruname = models.CharField(max_length=50,default='')
     comment = models.CharField(max_length=2000,default='')    
+    postid = models.IntegerField(max_length=100, default='')
 
     def __str__(self):
-        return self.recieveruname
+        return self.recieveruname + str(self.postid)
