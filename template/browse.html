@@ -32,6 +32,7 @@
             <ul>
               <li><a class="nav-link" href="/">Home</a></li>
               <li><a class="nav-link " href="browse">Browse</a></li>
+              <li><a class="nav-link " href="/forums">Forums</a></li>    
               {% if user.is_authenticated %}
               <li><a class="nav-link " href="/yprofile/{{user.username}}">Your Profile</a></li>
               <li><a class="nav-link " href="/logout">Logout</a></li>
@@ -47,9 +48,10 @@
     </div>
   </header>
   <div class="s01" style="background: url('/static/img/photo-1541746972996-4e0b0f43e02a.webp'); background-size: cover;">
-    <form>
+    <form method="POST">
+      {% csrf_token %}
       <fieldset>
-        <legend>Discover the Amazing City</legend>
+        <legend>Search By Name or Field</legend>
       </fieldset>
       <div class="inner-form">
         <div class="input-field first-wrap">
@@ -71,46 +73,48 @@
     </form>
   </div>
   <div class="row justify-content-center" style="margin-top:5% ;">
-    <div class="container" >
+    <div class="container " >
       <div class="row" style="margin-bottom: 2%;">
       <div class="col-4"> </div>
       <div class="col-4 ">  
-        <button class="btn btn-primary" onclick="changetoent()" style="margin-right: 17%;margin-left: 5%; height: 8vh; font-size: x-large;   color: white; background:#18d26e; border: #18d26e; transition: 0.5s; " >Entreprenuers</button>
+        <button class="btn btn-primary" onclick="changetoent()" style="margin-right: 17%; height: 8vh; font-size: x-large;   color: white; background:#18d26e; border: #18d26e; transition: 0.5s; " >Entreprenuers</button>
         <button class="btn btn-primary" onclick="changetoinv()" style="height: 8vh; font-size: x-large;color: white; background:#18d26e; border: #18d26e; transition: 0.5s; " >Investors</button>  
       </div>  
       </div>    
     </div>
     <br/><br/>
     <hr/>    
-     <div id="showx" class="row">
+     <div id="showx" class="row pb-5">
         {% for m in ents %}
-        <div class="col-4 portfolio-item filter-app ">  
-        <a href="#">
-        <div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;">
+        <div class="col-4 ">  
+        <a href="/yprofile/{{m.username}}">
+        <div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;">
         <figure>
-            <img src="{{m.image.url}}" class="img-fluid" alt="" />
+            <img src="{{m.image.url}}" class="img-fluid" alt="" style="border-radius: 8px;"/>
         </figure>
         <hr/>
         <div class="portfolio-info">
-            <h4 align="center"><a href="portfolio-details.html">{{m.companyname}}</a></h4>
-            <p align="center" style="line-height: 0%;">Enterpreneurs</p>
+            <h4 align="center">{{m.companyname}}</h4>
+            <p align="center" style="line-height: 0%; color:black">{{m.field}}</p>
         </div>
         </div>
             </a>
         </div>     
-        {% endfor %}   
+        {% empty %}
+           <h1 align="center">No Results.</h1>
+        {% endfor %}    
      </div>    
-            
+
   </div>
 </body>
 
 <script>
     function changetoent() {
         // document.getElementById('showx').innerHTML='{% for m in ent2s %}<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{{m.image.url}}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">{{m.companyname}}</a></h4><p align="center" style="line-height: 0%;">ifejk</p></div></div></a></div>{% endfor %}'
-        document.getElementById('showx').innerHTML ='{% for m in ents %}<div class="col-4 portfolio-item filter-app "><a href="/yprofile/{{m.username}}"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{{m.image.url}}" class="img-fluid" alt=""></figure><hr/><div class="portfolio-info"><h4 align="center">{{m.companyname}}</h4><p align="center" style="line-height: 0%;">Enterpreneurs</p></div></div></a></div>{%endfor%}'
+        document.getElementById('showx').innerHTML ='{% for m in ents %}<div class="col-4 portfolio-item filter-app "><a href="/yprofile/{{m.username}}"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;"><figure><img src="{{m.image.url}}" class="img-fluid" alt="" style="border-radius: 8px;"></figure><hr/><div class="portfolio-info"><h4 align="center">{{m.companyname}}</h4><p align="center" style="line-height: 0%;color:black">{{m.field}}</p></div></div></a></div>{% empty%}<h1 align="center">No Results.</h1>{%endfor%}'        
     }
     function changetoinv() {
-        document.getElementById('showx').innerHTML='<div class="col-4 portfolio-item filter-app "><a href="#"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 20%;"><figure><img src="{% static "/img/portfolio/app1.jpg" %}" class="img-fluid" alt=""></figure><div class="portfolio-info"><h4 align="center"><a href="portfolio-details.html">Investors 1</a></h4><p align="center" style="line-height: 0%;">Investors</p></div></div></a></div>'
+        document.getElementById('showx').innerHTML='{% for c in invs %}<div class="col-4 portfolio-item filter-app "><a href="/yprofile/{{c.username}}"><div class="portfolio-wrap" style="max-width: 80%; margin-left: 10%;"><figure><img src="{{c.image.url}}" class="img-fluid" alt="" style="border-radius: 8px;"></figure><hr/><div class="portfolio-info"><h4 align="center">{{c.firmname}}</h4><p align="center" style="line-height: 0%;color:black">{{c.invfield}}</p></div></div></a></div>{% empty%}<h1 align="center">No Results.</h1>{% endfor%}'
     }
 </script>
 

@@ -1,4 +1,8 @@
+from email.policy import default
 from operator import mod
+from pyexpat import model
+from statistics import mode
+from timeit import default_timer
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -31,6 +35,17 @@ class Investor(models.Model):
     invfield = models.CharField(max_length=1000, default="General")   
     firmname = models.CharField(max_length=200, default="")
     image = models.ImageField(default='1920-1.jpg')
-    
+    is_investor = models.BooleanField(default=False)    
+
     def __str__(self):
         return self.name
+
+class Forum(models.Model):      
+    title = models.CharField(max_length=500)
+    details = models.CharField(max_length=1000)
+    posteruname = models.CharField(max_length=100)
+    forfield = models.CharField(max_length=100, default="General")
+    image = models.ImageField(default='1920-1.jpg')
+
+    def __str__(self):
+        return self.posteruname

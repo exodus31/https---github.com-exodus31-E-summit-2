@@ -27,9 +27,9 @@
           <h1 class="logo" style="border-left:none ;"><a href="/" ><img src="/static/img/,,,.png"> TresComas</a></h1>
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link " href="#">Home</a></li>
-              <li><a class="nav-link " href="#aboutz">About</a></li>
+              <li><a class="nav-link " href="#">Home</a></li>              
               <li><a class="nav-link " href="/browse">Browse</a></li>
+              <li><a class="nav-link " href="/forums">Forums</a></li>
               {% if user.is_authenticated %}
               <li><a class="nav-link " href="yprofile/{{user.username}}">Your Profile</a></li>
               <li><a class="nav-link " href="logout">Logout</a></li>
@@ -46,7 +46,7 @@
   </header>  
   <section id="hero">
     <div class="hero-container">
-      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
         <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
 
@@ -66,45 +66,27 @@
   </section>
 
   <main id="main">  
-    <div class="container" id="aboutz">
-      <header class="section-header mt-4">
-        <h3><br><br>Featured Startups</h3>        
+    <div class="container" style="width: 100%;">
+      <header align="center">
+        <h3 style="font-size: 50px; font-weight: 800;"><br>Featured Startups</h3>        
       </header>
+      <br>
         <div class="row about-cols mt-4">
-          <div class="col-md-4">
+          {% for e in ents %}          
+          <div class="col-lg-4">
+            <a href="/yprofile/{{e.username}}">
             <div class="about-col">
               <div class="img">
-                <img src="{% static '/img/about-mission.jpg' %}" alt="" class="img-fluid">                
+                <img src="{{e.image.url}}" alt="..." class="img-fluid" style="border-radius: 8px">                
               </div>
-              <h2 class="title mt-2"><a href="#">Our Mission</a></h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              <h2 class="title mt-2" align="center">{{e.companyname}}</h2>
+              <p style="color:black">
+                {{e.qpitch}}
               </p>
             </div>
-          </div>  
-          <div class="col-md-4">
-            <div class="about-col">
-              <div class="img">
-                <img src="{% static '/img/about-plan.jpg' %}" alt="" class="img-fluid">                
-              </div>
-              <h2 class="title mt-2"><a href="#">Our Plan</a></h2>
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="about-col">
-              <div class="img">
-                <img src="{% static '/img/about-vision.jpg' %}" alt="" class="img-fluid">                
-              </div>
-              <h2 class="title mt-2"><a href="#">Our Vision</a></h2>
-              <p>
-                Nemo enim ipsam voluptatem quia voluptas sit aut odit aut fugit, sed quia magni dolores eos qui ratione voluptatem sequi nesciunt Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-              </p>
-            </div>
-          </div>
+            </a>
+          </div>            
+          {% endfor %}                    
       </div>  
     </div>    
     
@@ -129,14 +111,12 @@
         </header>      
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <a href="#">
+                <a href="/forums">
                 <img src="/static/img/community1.jpeg" class="testimonial-img" alt="">
                 <h3 style="font-weight: normal ;">Saul Goodman</h3>
                 <p  style="font-size: 1.5vw;">
-                  Scaling Up: Guide To Building & Retaining Startup Culture
-                  
-                  <h4 align="centre" style="color: black; text-decoration: underline ;">Read More</h4>
-                  
+                  Scaling Up: Guide To Building & Retaining Startup Culture                  
+                  <h4 align="centre" style="color: black; text-decoration: underline ;">View More</h4>                  
                   </p>
                 </a>
               </div>

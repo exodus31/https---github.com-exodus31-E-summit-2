@@ -1,49 +1,64 @@
-from tkinter.tix import StdButtonBox
+from timeit import default_timer
+from turtle import pos
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as dj_login, logout
-from .models import Enterp, Investor
+from .models import Enterp, Investor, Forum
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    i=0
+    j=0
+    EE = []
+    while j!=3:        
+        obj = Enterp.objects.filter(id=i).first()
+        if obj is not None:
+            EE.append(obj)
+            j=j+1        
+        i=i+1
+    return render(request, 'index.html', {'ents': EE})
 
 def signup(request):
     return render(request, 'signup1.html')
 
-def browse(request):    
+def browse(request):
     II = Investor.objects.all()
     EE = Enterp.objects.all()    
     if request.method == 'POST':
-        searchx = request.POST.get('searchx')
-        filterq = request.POST.get('filterq')
-        passarr1=[]
-        passarr2=[]
-        for s in Investor:                        
-            sname = s.name.lower()+s.firmname.lower()
-            result = sname.find(searchx)
-            
-            if(result != -1):
-                if filterq == 'all':
-                    passarr1.append(s)    
-                elif s.invfield == filterq:
-                    passarr1.append(s)
+        searchx = request.POST.get("searchx")
+        category = request.POST.get("filterq")
+        search = searchx.lower()
+        
+        II1=[]
+        EE1=[]
 
+        if search == "":
+            if category == 'all':
+                II1 = Investor.objects.all()
+                EE1 = Enterp.objects.all()
+            else:
+                II1 = Investor.objects.filter(invfield = category)
+                EE1 = Enterp.objects.filter(field = category)
+            return render(request, 'browse.html', { 'invs': II1, 'ents': EE1})
+        else:
+            for i in Investor.objects.all():
+                name = i.firmname.lower()+i.name.lower()
+                result = name.find(search)            
+                if result != -1 and category == 'all':
+                    II1.append(i)
+                elif result != -1 and i.invfield == category:
+                    II1.append(i)
 
-        for s in Enterp:                        
-            sname = s.companyname.lower()+s.name.lower()
-            result = sname.find(searchx)
-            if(result != -1):
-                if filterq == 'all':
-                    passarr2.append(s)    
-                elif s.field == filterq:
-                    passarr2.append(s)  
-
-            xx = Enterp.objects.all()  
-        return render(request, 'browse.html', {'invs': passarr1, 'ents': passarr2})
-
+            for e in Enterp.objects.all():
+                name = e.companyname.lower()+e.name.lower()
+                result = name.find(search)
+                if result != -1 and category == 'all':
+                    EE1.append(e)
+                elif result != -1 and e.field == category:
+                    EE1.append(e)
+            return render(request, 'browse.html', {'invs': II1, 'ents':EE1})                    
     return render(request, 'browse.html', {'invs': II, 'ents': EE})
 
 def signup_ent(request):
@@ -69,7 +84,7 @@ def signup_ent(request):
                         i=i+1
                 else:
                         break
-        ent_obj = Enterp.objects.create(id =i,user = user_obj, username = username, email = email, name = name)
+        ent_obj = Enterp.objects.create(id =i,user = user_obj, username = username, email = email, name = name,is_investor = False)
         ent_obj.save()
         return redirect('/login')
     return render(request, 'signup_ent.html')
@@ -98,7 +113,7 @@ def signup_inv(request):
                         i=i+1
                 else:
                         break
-        inv_obj = Investor.objects.create(id =i, user = user_obj, username = username, email = email, name = name)
+        inv_obj = Investor.objects.create(id =i, user = user_obj, username = username, email = email, name = name, is_investor = True)
         inv_obj.save()
         return redirect('/login')
     return render(request, 'signup_inv.html')
@@ -179,4 +194,17 @@ def yprofile(request, pk):
     return render(request, 'yourprofile.html', {'obj': obj})
 
 def forums(request):
-    return render(request, 'forums.html')
+    ff = Forum.objects.all()
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        posteruname = request.POST.get('username')
+        image = request.FILES.get('image')        
+        new_obj = Forum.objects.create( title = title, details = content, posteruname = posteruname, image = image)
+        new_obj.save()
+    return render(request, 'forums.html', {'forums': ff})
+
+def deletepost(request, pk):
+    Forum.objects.filter(id=pk).delete()
+    return redirect('/forums')
+    

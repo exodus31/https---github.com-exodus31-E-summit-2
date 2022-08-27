@@ -47,11 +47,15 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2> Welcome {{obj.name}}</h2>         
+          {% if user.username == obj.username%}          
+            <h2> Welcome {{obj.name}}</h2>         
+          {% else %}
+            <h2>{{obj.name}}'s Page</h2>         
+          {% endif %}
         </div>
       </div>
     </section>
-    {% if user.is_staff %}
+    {% if obj.is_investor %}
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
         <div class="row gy-4">
@@ -63,9 +67,11 @@
                 </div>                                
               </div>   
               <div class="container mt-4">
-                <a onclick="editphoto()"><button class="btn btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;">Edit Profile Photo</button></a>
-                <br/>                
+                {% if user.username == obj.username%}
+                <a onclick="editphoto()"><button class="btn btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;">Edit Image</button></a>
+                <br/>                                
                 <div id="photo"></div>
+                {% endif %}
                 <div class="portfolio-description ">
                     <h2>About Investor</h2>
                     <p>
@@ -108,9 +114,11 @@
                   </div>                                
                 </div>   
                 <div class="container mt-4">
-                  <a onclick="editphoto()"><button class="btn btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s;">Edit Image</button></a>
-                  <br/>                
+                  {% if user.username == obj.username%}
+                  <a onclick="editphoto()"><button class=" btn-primary" style="color: white; background:#18d26e; border: #18d26e; transition: 0.5s; border-radius: 8px; padding: 1%;">Edit Image</button></a>
+                  <br/>                                  
                   <div id="photo"></div>
+                  {% endif %}
                   <div class="portfolio-description ">
                       <h2>Buisness Plan</h2>
                       <p>
@@ -144,9 +152,19 @@
     {% endif%}
   </main>
   <script>
+    let x=0;
     function editphoto(){
-      document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Profile Photo</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{user.username}}"><br/><input type="submit" class="btn btn-primary" href="/yprofile/{{user.username}}" value="Edit"/></form> '
-    }
+      
+      if (x == 0){
+        x=1;
+        document.getElementById('photo').innerHTML='<br/><form method="POST" enctype="multipart/form-data">{% csrf_token %}<h4>Edit Image</h4><input required type="file" style="background-color: black; border: none; color: white; padding: 10;" class="form-control" id="exampleFormControlInput1" name="image"><input type="hidden" class="form-control" id="exampleFormControlInput1" name="username" value="{{user.username}}"><br/><input type="submit" class="btn btn-primary" href="/yprofile/{{user.username}}" value="Edit"/></form> '        
+
+      }
+      else{
+        x=0;
+        document.getElementById('photo').innerHTML=''
+      }
+    }    
   </script>
   </body>
   </html>

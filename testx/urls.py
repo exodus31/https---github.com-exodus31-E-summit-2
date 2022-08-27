@@ -13,5 +13,7 @@ urlpatterns = [
     path('login', views.login, name="login"), 
     path('yprofile/<str:pk>', views.yprofile, name="yprofile"),
     path('createprof/logout', views.logout, name="createproflogout"),
-    path('forums', views.forums, name='forum'),    
+    path('forums', views.forums, name='forum'),  
+    path('deletepost/<str:pk>', views.deletepost, name="dpost"),
+
 ]
