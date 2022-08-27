@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as dj_login, logout
-from .models import Enterp, Investor, Forum
+from .models import Enterp, Investor, Forum, Comments
 
 # Create your views here.
 
@@ -195,6 +195,7 @@ def yprofile(request, pk):
 
 def forums(request):
     ff = Forum.objects.all()
+    cc = Comments.objects.all()
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
@@ -202,11 +203,23 @@ def forums(request):
         image = request.FILES.get('image')        
         new_obj = Forum.objects.create( title = title, details = content, posteruname = posteruname, image = image)
         new_obj.save()
-    return render(request, 'forums.html', {'forums': ff})
+    return render(request, 'forums.html', {'forums': ff, 'comments': cc})
 
 def deletepost(request, pk):
     Forum.objects.filter(id=pk).delete()
     return redirect('/forums')
     
-
+def ccomment(request):    
+    comment = request.POST.get('comment')
+    reuname = request.POST.get('recieveruname')
+    senduname = request.POST.get('senderuname')
+    i=1
+    while True:
+            if(Comments.objects.filter(id=i)):
+                    i=i+1
+            else:
+                    break
+    new_obj = Comments.objects.create(id = i,  recieveruname = reuname, senderuname = senduname, comment = comment)
+    new_obj.save()
+    return redirect('/forums')
 

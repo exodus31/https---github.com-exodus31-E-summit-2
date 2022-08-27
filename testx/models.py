@@ -54,7 +54,7 @@ class Forum(models.Model):
 class Comments(models.Model):
     senderuname = models.CharField(max_length=50,default='')
     recieveruname = models.CharField(max_length=50,default='')
-    content = models.CharField(max_length=2000,default='')    
+    comment = models.CharField(max_length=2000,default='')    
 
     def __str__(self):
         return self.recieveruname

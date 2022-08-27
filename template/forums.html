@@ -101,34 +101,42 @@
                 </p>
                 {% if user.username == f.posteruname%}
                 <div class="container">
-                  <a href="/deletepost/{{f.id}}"><button class="btnx" style="background-color:red; border: none; padding: 1.5%;border-radius: 8px; color: white;">Delete</button></a>
+                  <a href="/deletepost/{{f.id}}"><button class="btnx" style="background-color:red; border: none; padding: 1.5%;border-radius: 8px; color: white;">Delete Post</button></a>
                 </div>
-                {% endif %}
-                <div class="read-more">
+                {% endif %}                                            
+                <div class="container" id="comm">
                   {% if user.username == f.posteruname %}
-                    <button onclick="commentbtn()" class="btncreate2">View Comments</button>
-                  {% else %}  
-                    <button onclick="commentbtn2()" class="btncreate2">Comment</button>
+                  {% for c in comments %}
+                    {% if c.recieveruname == f.posteruname %}
+                    <br>
+                    <div class="card" style="padding-left: 2%">
+                      <p style="padding-top: 2%;">Commented By: {{c.senderuname}}</p>
+                      <h4>{{c.comment}}</h4>
+                    </div>  
+                    {% endif%}          
+                  {% endfor %}        
+                    <br>
+                  {% else %}
+                  {% if user.is_authenticated %}
+                  <h4 style="padding-left: 1%;">Add a comment</h4>
+                  <form method="post" action="createcomment">
+                    {% csrf_token %}                    
+                    <div class="form-group" >
+                      <input type="text" name="comment" class="form-control" placeholder="Comment" required>
+                    </div>
+                    <br/>
+                    <div class="form-group" >
+                      <input type="hidden" name="senderuname" class="form-control" value="{{user.username}}">
+                    </div>
+                    <div class="form-group" ><input type="hidden" name="recieveruname" class="form-control" value="{{f.posteruname}}">
+                    </div>
+                    <div class="">
+                      <button type="submit"class="btncreate2" style="font-size: 20px;">Comment</button>
+                    </div>
+                  </form>
                   {% endif %}
-                </div>                
-                  <div class="container" id="comm">
-                    <form method="post" action="createcomment">
-                      {% csrf_token %}
-                      <br/>
-                      <div class="form-group" >
-                        <input type="text" name="title" class="form-control" placeholder="Comment" required>
-                      </div>
-                      <br/>
-                      <div class="form-group" >
-                        <input type="hidden" name="senderuname" class="form-control" value="{{user.username}">
-                      </div>
-                      <div class="form-group" >
-                        <input type="hidden" name="recieveruname" class="form-control" value="{{f.posteruname}">
-                      </div>
-                      <div class="">
-                          <button type="submit"class="btncreate2" style="font-size: 20px;">Create</button>
-                        </div>
-                    </form>
+                  {% endif %}
+                  
                 </div>                
               </div>
             </article> 
@@ -156,11 +164,10 @@
         x=0
         document.getElementById('cpost').innerHTML=''
       }
-    }
-
-    function commentbtn(){
+    }    
+      function commentbtn2(){
       if(x==0){
-        document.getElementById('comm').innerHTML='<br><div class="card" style="padding-left: 2%"><p style="padding-top: 2%;">Name</p><h4>Content</h4></div><br><div class="card" style="padding-left: 2%"><p style="padding-top: 2%;">Name</p><h4>Content</h4></div><br><div class="card" style="padding-left: 2%"><p style="padding-top: 2%;">Name</p><h4>Content</h4></div><br>'
+        document.getElementById('comm').innerHTML='<form method="post" action="createcomment">{% csrf_token %}<br/><div class="form-group" ><input type="text" name="comment" class="form-control" placeholder="Comment" required></div><br/><div class="form-group" ><input type="hidden" name="senderuname" class="form-control" value="{{user.username}}"></div><div class="form-group" ><input type="hidden" name="recieveruname" class="form-control" value="{{f.posteruname}}"></div><div class=""><button type="submit"class="btncreate2" style="font-size: 20px;">Create</button></div></form>'
         x=1
       }
       else{
